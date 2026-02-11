@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Babu Brands Garage POS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="brand-wrap">
+          <div class="logo-mark">BB</div>
+          <div>
+            <h1>Babu Brands Garage POS</h1>
+            <p>System • Smartly • Useful Growth</p>
+          </div>
+        </div>
+        <div class="status-wrap">
+          <div id="trialStatus" class="status-pill"></div>
+          <button id="logoutBtn" class="secondary-btn">Logout</button>
+        </div>
+      </header>
+
+      <main class="main-grid" id="protectedApp" hidden>
+        <section class="panel" id="superAdminPanel" hidden>
+          <h2>Super Admin • Account Control</h2>
+          <p class="panel-help">Create parent login accounts with 3h/6h temporary trial or 30-day subscription.</p>
+          <form id="accountForm" class="stack-form">
+            <input name="username" required placeholder="New username" />
+            <input name="password" required type="password" placeholder="New password" />
+            <select name="plan" required>
+              <option value="3h">Temporary Trial (3 hours)</option>
+              <option value="6h">Temporary Trial (6 hours)</option>
+              <option value="30d">Subscription (30 days)</option>
+            </select>
+            <button type="submit">Create Account</button>
+          </form>
+
+          <h3>Managed Accounts</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Role</th>
+                <th>Plan</th>
+                <th>Expires</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="accountsTable"></tbody>
+          </table>
+        </section>
+
+        <section class="panel">
+          <h2>Garage Records</h2>
+          <form id="customerForm" class="stack-form">
+            <h3>Add Customer</h3>
+            <input name="name" required placeholder="Customer name" />
+            <input name="phone" required placeholder="Phone number" />
+            <input name="email" placeholder="Email" />
+            <button type="submit">Save Customer</button>
+          </form>
+
+          <form id="vehicleForm" class="stack-form">
+            <h3>Add Vehicle</h3>
+            <input name="plate" required placeholder="Plate number" />
+            <input name="model" required placeholder="Model" />
+            <input name="year" type="number" placeholder="Year" />
+            <select name="customerId" id="vehicleCustomer" required></select>
+            <button type="submit">Save Vehicle</button>
+          </form>
+
+          <form id="jobForm" class="stack-form">
+            <h3>Create Service Job</h3>
+            <select name="vehicleId" id="jobVehicle" required></select>
+            <textarea name="service" required placeholder="Work details"></textarea>
+            <input name="labor" type="number" min="0" step="0.01" placeholder="Labor cost" />
+            <input name="parts" type="number" min="0" step="0.01" placeholder="Parts cost" />
+            <select name="status">
+              <option value="Open">Open</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+            <button type="submit">Save Job</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>POS Billing</h2>
+          <form id="saleForm" class="stack-form">
+            <input name="item" required placeholder="Item / Service" />
+            <input name="qty" required type="number" min="1" value="1" placeholder="Qty" />
+            <input name="price" required type="number" min="0" step="0.01" placeholder="Unit price" />
+            <button type="submit">Add Sale</button>
+          </form>
+
+          <div class="summary-card">
+            <strong>Today Sales Total</strong>
+            <p id="todaySales">$0.00</p>
+          </div>
+
+          <h3>Recent Sales</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="salesTable"></tbody>
+          </table>
+
+          <h3>Service Jobs</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Service</th>
+                <th>Status</th>
+                <th>Estimate</th>
+              </tr>
+            </thead>
+            <tbody id="jobsTable"></tbody>
+          </table>
+        </section>
+
+        <section class="panel">
+          <h2>Customer & Vehicle Registry</h2>
+          <input id="searchInput" placeholder="Search customer / plate" />
+
+          <h3>Customers</h3>
+          <ul id="customerList" class="data-list"></ul>
+
+          <h3>Vehicles</h3>
+          <ul id="vehicleList" class="data-list"></ul>
+        </section>
+      </main>
+    </div>
+
+    <div class="auth-overlay" id="authOverlay">
+      <form id="loginForm" class="login-card">
+        <h2>Babu Brands Access</h2>
+        <p>Sign in to open the parent container and use the garage POS.</p>
+        <input name="username" required placeholder="Username" />
+        <input name="password" required type="password" placeholder="Password" />
+        <button type="submit">Login</button>
+        <small>Default super admin: <b>superadmin</b> / <b>babu@super</b></small>
+      </form>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
